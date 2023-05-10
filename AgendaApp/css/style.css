@@ -69,6 +69,7 @@ body {
 }
 .agenda__day:hover {
   cursor: pointer;
+  background-color: #c8c8c8;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -33,15 +33,21 @@ class Agenda {
   htmlElement;
 
   constructor(data) {
-    this.renderer = new Renderer();
+    this.htmlElement = document.createElement("article");
+    this.htmlElement.classList.add("agenda");
     this.data = data;
+    this.renderer = new Renderer();
+    this.renderer.render("body", this.htmlElement);
     this.header = new Header(this.data.name);
     this.month = new Month(this, this.data.days);
-    this.htmlElement = document.createElement("article");
   }
 }
 
-class Renderer {}
+class Renderer {
+  render(placeToRender, whatToRender) {
+    document.querySelector(placeToRender).appendChild(whatToRender);
+  }
+}
 
 class Header {
   nameOfMonth;

@@ -81,8 +81,8 @@ class Month {
     this.agenda.render(".agenda", this.htmlElement);
 
     this.numberOfDays = numberOfDays;
-    for (let i = 0; i < this.numberOfDays; i++) {
-      this.days.push(new Day(this));
+    for (let i = 1; i <= this.numberOfDays; i++) {
+      this.days.push(new Day(this, i));
     }
   }
 
@@ -94,10 +94,15 @@ class Month {
 class Day {
   month;
   htmlElement;
+  dayNumber;
 
-  constructor(month) {
+  constructor(month, dayNumber) {
+    this.dayNumber = dayNumber;
+
     this.htmlElement = document.createElement("li");
     this.htmlElement.classList.add("agenda__day");
+    this.htmlElement.innerText = this.dayNumber;
+
     this.month = month;
     this.month.renderDays(".agenda__month", this.htmlElement);
   }

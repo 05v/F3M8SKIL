@@ -1,5 +1,32 @@
+@use "../../abstracts/mixins";
+
 .agenda {
-    width: 40rem;
+    width: 50rem;
     aspect-ratio: 1/1;
     background-color: #eee;
+    border-radius: 2rem;
+
+    &__header {
+        background: #E74646;
+        height: 20%;
+        border-top-right-radius: 2rem;
+        border-top-left-radius: 2rem;
+    }
+
+    &__month {
+        height: 80%;
+        padding: 2rem;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1rem;
+    }
+
+    &__day {
+        background-color: darken(#eee, 7.5%);
+        @include mixins.flexCenter();
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
 }

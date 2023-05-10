@@ -20,12 +20,39 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 4rem;
+  font-size: 2rem;
+  font-family: sans-serif;
 }
 
 .agenda {
-  width: 40rem;
+  width: 50rem;
   aspect-ratio: 1/1;
   background-color: #eee;
+  border-radius: 2rem;
+}
+.agenda__header {
+  background: #E74646;
+  height: 20%;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+.agenda__month {
+  height: 80%;
+  padding: 2rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+.agenda__day {
+  background-color: #dbdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */

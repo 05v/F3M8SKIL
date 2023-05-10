@@ -4,11 +4,25 @@ class AgendaApp {
 
   constructor() {
     this.api = new Api();
+    this.api.getData().then((result) => {});
     this.agenda = new Agenda();
   }
 }
 
-class Api {}
+class Api {
+  dataFromApi = [];
+
+  async getData() {
+    await fetch("../data/data.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.dataFromApi = data.months;
+      });
+    return this.dataFromApi;
+  }
+}
 
 class Agenda {
   renderer;

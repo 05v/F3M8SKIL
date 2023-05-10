@@ -30,13 +30,14 @@ class Agenda {
   header;
   month;
   data;
+  htmlElement;
 
   constructor(data) {
-    this.data = data;
-    console.log(this.data);
     this.renderer = new Renderer();
+    this.data = data;
     this.header = new Header(this.data.name);
     this.month = new Month(this, this.data.days);
+    this.htmlElement = document.createElement("article");
   }
 }
 
@@ -44,8 +45,11 @@ class Renderer {}
 
 class Header {
   nameOfMonth;
+  htmlElement;
+
   constructor(nameOfMonth) {
     this.nameOfMonth = nameOfMonth;
+    this.htmlElement = document.createElement("header");
   }
 }
 
@@ -53,6 +57,7 @@ class Month {
   days = [];
   agenda;
   numberOfDays;
+  htmlElement;
 
   constructor(agenda, numberOfDays) {
     this.agenda = agenda;
@@ -60,13 +65,17 @@ class Month {
     for (let i = 0; i < this.numberOfDays; i++) {
       this.days.push(new Day(this));
     }
+    this.htmlElement = document.createElement("ul");
   }
 }
 
 class Day {
   month;
+  htmlElement;
+
   constructor(month) {
     this.month = month;
+    this.htmlElement = document.createElement("li");
   }
 }
 

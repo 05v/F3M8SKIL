@@ -38,8 +38,12 @@ class Agenda {
     this.data = data;
     this.renderer = new Renderer();
     this.renderer.render("body", this.htmlElement);
-    this.header = new Header(this.data.name);
+    this.header = new Header(this, this.data.name);
     this.month = new Month(this, this.data.days);
+  }
+
+  render(placeToRender, whatToRender) {
+    this.renderer.render(placeToRender, whatToRender);
   }
 }
 
@@ -52,10 +56,13 @@ class Renderer {
 class Header {
   nameOfMonth;
   htmlElement;
+  agenda;
 
-  constructor(nameOfMonth) {
-    this.nameOfMonth = nameOfMonth;
+  constructor(agenda, nameOfMonth) {
+    this.agenda = agenda;
     this.htmlElement = document.createElement("header");
+    this.agenda.render(".agenda", this.htmlElement);
+    this.nameOfMonth = nameOfMonth;
   }
 }
 

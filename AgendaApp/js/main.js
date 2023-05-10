@@ -18,7 +18,7 @@ class Agenda {
   constructor() {
     this.renderer = new Renderer();
     this.header = new Header();
-    this.month = new Month();
+    this.month = new Month(this);
   }
 }
 
@@ -28,14 +28,21 @@ class Header {}
 
 class Month {
   days = [];
-  constructor() {
+  agenda;
+
+  constructor(agenda) {
+    this.agenda = agenda;
     for (let i = 0; i < 31; i++) {
-      this.days.push(new Day());
+      this.days.push(new Day(this));
     }
   }
 }
 
-class Day {}
+class Day {
+  month;
+  constructor(month) {
+    this.month = month;
+  }
+}
 
 const vladsAgenda = new AgendaApp();
-console.log(vladsAgenda);

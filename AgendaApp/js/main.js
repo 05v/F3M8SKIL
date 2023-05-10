@@ -61,6 +61,7 @@ class Header {
   constructor(agenda, nameOfMonth) {
     this.agenda = agenda;
     this.htmlElement = document.createElement("header");
+    this.htmlElement.classList.add("agenda__header");
     this.agenda.render(".agenda", this.htmlElement);
     this.nameOfMonth = nameOfMonth;
   }
@@ -74,11 +75,19 @@ class Month {
 
   constructor(agenda, numberOfDays) {
     this.agenda = agenda;
+
+    this.htmlElement = document.createElement("ul");
+    this.htmlElement.classList.add("agenda__month");
+    this.agenda.render(".agenda", this.htmlElement);
+
     this.numberOfDays = numberOfDays;
     for (let i = 0; i < this.numberOfDays; i++) {
       this.days.push(new Day(this));
     }
-    this.htmlElement = document.createElement("ul");
+  }
+
+  renderDays(placeToRender, whatToRender) {
+    this.agenda.render(placeToRender, whatToRender);
   }
 }
 
@@ -87,8 +96,10 @@ class Day {
   htmlElement;
 
   constructor(month) {
-    this.month = month;
     this.htmlElement = document.createElement("li");
+    this.htmlElement.classList.add("agenda__day");
+    this.month = month;
+    this.month.renderDays(".agenda__month", this.htmlElement);
   }
 }
 

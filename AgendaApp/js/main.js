@@ -4,8 +4,9 @@ class AgendaApp {
 
   constructor() {
     this.api = new Api();
-    this.api.getData().then((result) => {});
-    this.agenda = new Agenda();
+    this.api.getData().then((result) => {
+      this.agenda = new Agenda(result[0]);
+    });
   }
 }
 
@@ -28,25 +29,35 @@ class Agenda {
   renderer;
   header;
   month;
+  data;
 
-  constructor() {
+  constructor(data) {
+    this.data = data;
+    console.log(this.data);
     this.renderer = new Renderer();
-    this.header = new Header();
-    this.month = new Month(this);
+    this.header = new Header(this.data.name);
+    this.month = new Month(this, this.data.days);
   }
 }
 
 class Renderer {}
 
-class Header {}
+class Header {
+  nameOfMonth;
+  constructor(nameOfMonth) {
+    this.nameOfMonth = nameOfMonth;
+  }
+}
 
 class Month {
   days = [];
   agenda;
+  numberOfDays;
 
-  constructor(agenda) {
+  constructor(agenda, numberOfDays) {
     this.agenda = agenda;
-    for (let i = 0; i < 31; i++) {
+    this.numberOfDays = numberOfDays;
+    for (let i = 0; i < this.numberOfDays; i++) {
       this.days.push(new Day(this));
     }
   }
@@ -60,3 +71,4 @@ class Day {
 }
 
 const vladsAgenda = new AgendaApp();
+console.log(vladsAgenda);

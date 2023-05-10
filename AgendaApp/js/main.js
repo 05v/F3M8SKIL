@@ -57,13 +57,33 @@ class Header {
   nameOfMonth;
   htmlElement;
   agenda;
+  leftButton;
+  rightButton;
+  monthNameText;
 
   constructor(agenda, nameOfMonth) {
     this.agenda = agenda;
+    this.nameOfMonth = nameOfMonth;
+
     this.htmlElement = document.createElement("header");
     this.htmlElement.classList.add("agenda__header");
+
+    this.leftButton = document.createElement("button");
+    this.leftButton.classList = "agenda__button agenda__button--left";
+    this.leftButton.innerText = "<";
+
+    this.monthNameText = document.createElement("h2");
+    this.monthNameText.classList.add("agenda__title");
+    this.monthNameText.innerText = this.nameOfMonth;
+
+    this.rightButton = document.createElement("button");
+    this.rightButton.classList = "agenda__button agenda__button--right";
+    this.rightButton.innerText = ">";
+
     this.agenda.render(".agenda", this.htmlElement);
-    this.nameOfMonth = nameOfMonth;
+    this.agenda.render(".agenda__header", this.leftButton);
+    this.agenda.render(".agenda__header", this.monthNameText);
+    this.agenda.render(".agenda__header", this.rightButton);
   }
 }
 

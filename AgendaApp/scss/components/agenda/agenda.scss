@@ -11,6 +11,19 @@
         height: 20%;
         border-top-right-radius: 2rem;
         border-top-left-radius: 2rem;
+        @include mixins.flexCenter();
+        justify-content: space-between;
+        padding: 2rem;
+    }
+
+    &__button {
+        background: none;
+        border: none;
+        font-size: 200%;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__month {
@@ -25,8 +38,12 @@
     &__day {
         background-color: darken(#eee, 7.5%);
         @include mixins.flexCenter();
-        width: 100%;
+        width: 80%;
         aspect-ratio: 1/1;
         border-radius: 50%;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

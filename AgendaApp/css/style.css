@@ -30,6 +30,9 @@ body {
   aspect-ratio: 1/1;
   background-color: #eee;
   border-radius: 2rem;
+  position: fixed;
+  right: 4rem;
+  bottom: 4rem;
 }
 .agenda__header {
   background: #E74646;
@@ -56,6 +59,7 @@ body {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   gap: 1rem;
 }
 .agenda__day {
@@ -70,6 +74,12 @@ body {
 .agenda__day:hover {
   cursor: pointer;
   background-color: #c8c8c8;
+}
+
+@media screen and (max-width: 62.5rem) {
+  .agenda {
+    position: static;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

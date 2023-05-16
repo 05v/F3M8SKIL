@@ -5,6 +5,9 @@
     aspect-ratio: 1/1;
     background-color: #eee;
     border-radius: 2rem;
+    position: fixed;
+    right: 4rem;
+    bottom: 4rem;
 
     &__header {
         background: #E74646;
@@ -32,6 +35,7 @@
         list-style: none;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(5, 1fr);
         gap: 1rem;
     }
 

@@ -1,14 +1,28 @@
 class AgendaApp {
   api;
   switcher;
+  month = 0;
 
   constructor() {
     this.api = new Api();
     this.switcher = new Switcher(this);
     this.api.getData().then((result) => {
-      this.switcher.loadAgenda(result[1]);
+      this.switcher.loadAgenda(result[this.month]);
     });
   }
+
+  switchMonths = (sign) => {
+    switch (sign) {
+      case "+":
+        this.month = this.month + 1;
+        break;
+      case "-":
+        this.month = this.month - 1;
+        break;
+    }
+
+    this.switcher.loadAgenda(this.api.dataFromApi[this.month]);
+  };
 }
 
 class Api {
@@ -128,7 +142,7 @@ class Button {
   }
 
   buttonClicked = () => {
-    console.log(this.agendaApp);
+    this.agendaApp.switchMonths("+");
   };
 
   render() {
@@ -137,7 +151,6 @@ class Button {
 }
 
 class Switcher {
-  loadAgenda;
   agendaApp;
   agenda;
 

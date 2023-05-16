@@ -21,6 +21,13 @@ class AgendaApp {
         break;
     }
 
+    if (this.month === 12) {
+      this.month = 0;
+    }
+    if (this.month === -1) {
+      this.month = 11;
+    }
+
     this.switcher.loadAgenda(this.api.dataFromApi[this.month]);
   };
 }
@@ -95,6 +102,7 @@ class Header {
 
     this.agenda.render(".agenda", this.htmlElement);
     this.leftButton = new Button(
+      "previous",
       "<",
       "agenda__button--left",
       this,
@@ -102,6 +110,7 @@ class Header {
     );
     this.agenda.render(".agenda__header", this.monthNameText);
     this.rightButton = new Button(
+      "next",
       ">",
       "agenda__button--right",
       this,
@@ -120,8 +129,10 @@ class Button {
   extraClass;
   header;
   agendaApp;
+  type;
 
-  constructor(innerText, extraClass, header, agendaApp) {
+  constructor(type, innerText, extraClass, header, agendaApp) {
+    this.type = type;
     this.innerText = innerText;
     this.extraClass = extraClass;
     this.header = header;
@@ -142,6 +153,11 @@ class Button {
   }
 
   buttonClicked = () => {
+    if (this.type === "previous") {
+      this.agendaApp.switchMonths("-");
+      return;
+    }
+
     this.agendaApp.switchMonths("+");
   };
 
@@ -153,17 +169,16 @@ class Button {
 class Switcher {
   agendaApp;
   agenda;
+  cleaner;
 
   constructor(agendaApp) {
     this.agendaApp = agendaApp;
+    this.cleaner = new Cleaner();
   }
 
   loadAgenda = (data) => {
+    this.cleaner.clean("body");
     this.agenda = new Agenda(data, this.agendaApp);
-  };
-
-  clicked = (type) => {
-    console.log("Ik moet naar " + type);
   };
 }
 
@@ -205,6 +220,12 @@ class Day {
 
     this.month = month;
     this.month.renderDays(".agenda__month", this.htmlElement);
+  }
+}
+
+class Cleaner {
+  clean(whereToClean) {
+    document.querySelector(whereToClean).innerHTML = "";
   }
 }
 

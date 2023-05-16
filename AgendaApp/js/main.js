@@ -68,17 +68,19 @@ class Header {
     this.htmlElement = document.createElement("header");
     this.htmlElement.classList.add("agenda__header");
 
-    this.leftButton = document.createElement("button");
-    this.leftButton.classList = "agenda__button agenda__button--left";
-    this.leftButton.innerText = "<";
+    this.leftButton = new Button("<", "agenda__button--left");
+    // this.leftButton = document.createElement("button");
+    // this.leftButton.classList = "agenda__button agenda__button--left";
+    // this.leftButton.innerText = "<";
 
     this.monthNameText = document.createElement("h2");
     this.monthNameText.classList.add("agenda__title");
     this.monthNameText.innerText = this.nameOfMonth;
 
-    this.rightButton = document.createElement("button");
-    this.rightButton.classList = "agenda__button agenda__button--right";
-    this.rightButton.innerText = ">";
+    this.rightButton = new Button(">", "agenda__button--right");
+    // this.rightButton = document.createElement("button");
+    // this.rightButton.classList = "agenda__button agenda__button--right";
+    // this.rightButton.innerText = ">";
 
     this.agenda.render(".agenda", this.htmlElement);
     this.agenda.render(".agenda__header", this.leftButton);
@@ -86,6 +88,25 @@ class Header {
     this.agenda.render(".agenda__header", this.rightButton);
   }
 }
+
+class Button {
+  htmlElement;
+  constructor(innerText, extraClass) {
+    this.innerText = innerText;
+    this.extraClass = extraClass;
+
+    this.htmlElement = document.createElement("button");
+
+    this.htmlElement.classList.add = "agenda__button";
+    this.htmlElement.classList.add = this.extraClass;
+
+    this.htmlElement.innerText = this.innerText;
+
+    console.log(this);
+  }
+}
+
+class Switcher {}
 
 class Month {
   days = [];

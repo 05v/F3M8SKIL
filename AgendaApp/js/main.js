@@ -68,45 +68,54 @@ class Header {
     this.htmlElement = document.createElement("header");
     this.htmlElement.classList.add("agenda__header");
 
-    this.leftButton = new Button("<", "agenda__button--left");
-    // this.leftButton = document.createElement("button");
-    // this.leftButton.classList = "agenda__button agenda__button--left";
-    // this.leftButton.innerText = "<";
-
     this.monthNameText = document.createElement("h2");
     this.monthNameText.classList.add("agenda__title");
     this.monthNameText.innerText = this.nameOfMonth;
 
-    this.rightButton = new Button(">", "agenda__button--right");
-    // this.rightButton = document.createElement("button");
-    // this.rightButton.classList = "agenda__button agenda__button--right";
-    // this.rightButton.innerText = ">";
-
     this.agenda.render(".agenda", this.htmlElement);
-    this.agenda.render(".agenda__header", this.leftButton);
+    this.leftButton = new Button("<", "agenda__button--left", this);
     this.agenda.render(".agenda__header", this.monthNameText);
-    this.agenda.render(".agenda__header", this.rightButton);
+    this.rightButton = new Button(">", "agenda__button--right", this);
+  }
+
+  render(placeToRender, whatToRender) {
+    this.agenda.render(placeToRender, whatToRender);
   }
 }
 
 class Button {
   htmlElement;
-  constructor(innerText, extraClass) {
+  innerText;
+  extraClass;
+  header;
+  constructor(innerText, extraClass, header) {
     this.innerText = innerText;
     this.extraClass = extraClass;
+    this.header = header;
 
     this.htmlElement = document.createElement("button");
 
-    this.htmlElement.classList.add = "agenda__button";
-    this.htmlElement.classList.add = this.extraClass;
+    this.htmlElement.className += " agenda__button";
+    this.htmlElement.className += " " + this.extraClass;
 
     this.htmlElement.innerText = this.innerText;
 
-    console.log(this);
+    this.switcher = new Switcher(this.extraClass);
+
+    this.render();
+  }
+  render() {
+    this.header.render("header", this.htmlElement);
   }
 }
 
-class Switcher {}
+class Switcher {
+  text;
+  constructor(text) {
+    this.text = text;
+    console.log(this.text);
+  }
+}
 
 class Month {
   days = [];
